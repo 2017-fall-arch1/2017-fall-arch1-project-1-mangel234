@@ -3,18 +3,19 @@
 
 
 /* a linked-list item */
-typedef struct LLItem_s {
-  struct LLItem_s *next; 
-  char *str;
+typedef struct LLItem_s { 
+struct LLItem_s *next;
+char *str;
+int key;
 } LLItem;
 
 /* a list of LLItems */
 typedef struct {
-  LLItem *first, *last;
+  LLItem *first *last *left, *right;
+  char *str;
 } LList;
 
-extern int llDoCheck;		/* set true for paranoid consistency checking */
-
+extern int heck;		/* set true for paranoid consistency checking */
 /* create a new list */
 LList *llAlloc();
 

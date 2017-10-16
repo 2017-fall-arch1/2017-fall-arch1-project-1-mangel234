@@ -7,13 +7,13 @@ int llDoCheck = 1;		/* set true for paranoid consistency checking */
 
 #define doCheck(_lp) (llDoCheck && llCheck(_lp))
 
-/* create a new list */
+/* create a new binary tree */
 LList *llAlloc()
 {
-  LList *lp = (LList *)malloc(sizeof(LList));
-  lp->first = lp->last = 0;
-  doCheck(lp);
-  return lp;
+ LList *lp = (LList *)malloc(sizeof(LList));
+ lp->left = lp->right = 0;
+ // doCheck(lp);
+ return lp;
 }
 
 /* recycle a list, discarding all items it contains */
@@ -40,13 +40,13 @@ void llMakeEmpty(LList *lp)
 }
   
 /* append a copy of str to end of list */
-void llPut(LList *lp, char *s)
+void llPut(LList *lp, char *str)
 {
   int len;
   char *scopy;
   LLItem *i;
 
-  doCheck(lp);
+ // doCheck(lp);
   /* w = freshly allocated copy of putWord */
   for (len = 0; s[len]; len++) /* compute length */
     ;
@@ -62,15 +62,24 @@ void llPut(LList *lp, char *s)
   i->next = 0;
 
   /* append to end of list */
-  if (lp->last) {			/* list not empty */
-    lp->last->next = i;
-  } else {			/* list empty */
-    lp->first = i;
-  }
+ /*if (lp->last) {	*/		/* list not empty */
+  /*  lp->last->next = i;*/
+/*  } else {	*/		/* list empty */
+ /*   lp->first = i;*/
+ /* }*/
 
+ /* if the tree is empty, retunr a new node */
+    if(*lp == NULL) return *llAlloc();
+ /* otherwise, recur down the tree */
+    if(strcmp(i, lp->i) < 0)
+	   lp->left = insert(lp->left, i);
+    else if(strcmp(i,lp->i) > 0)
+		   lp->right = insert(lp(lp->right, lp);
+
+	return lp; 
   /* new item is last on list */
-  lp->last = i;
-  doCheck(lp);
+/*  lp->last = i;*/
+/*  // doCheck(lp);*/
 }
 
 /* print list membership.  Prints default mesage if message is NULL */

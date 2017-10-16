@@ -23,19 +23,20 @@ int main()
   char buf[100];
   LList *lp = llAlloc();	/* make empty list */
 
-  llPrint(lp, "List contents, prior to reading input:");
+/*  llPrint(lp, "List contents, prior to reading input:");*/
 
+ 
   while (gets_n(buf, 100))	/* build list */
     llPut(lp, buf);
 
-  llPrint(lp, "List contents, after building list:");
+ /* llPrint(lp, "List contents, after building list:");*/
 
-  llMakeEmpty(lp);
+ /* llMakeEmpty(lp);*/
 
   printf("After emptying the list...");
-  llPrint(lp, 0);		/* default message */
+ /* llPrint(lp, 0);*/		/* default message */
 
-  llFree(lp);
+/*  llFree(lp);*/
 
   return 0;
 }
