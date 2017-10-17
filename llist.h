@@ -1,37 +1,32 @@
-#ifndef llist_included		/* prevent multiple inclusion */
-#define llist_included
+    #ifndef llist_included		/* prevent multiple inclusion */
+    #define llist_included
 
 
-/* a linked-list item */
-typedef struct LLItem_s { 
-struct LLItem_s *next;
-char *str;
-int key;
-} LLItem;
+    /* BST structure */
+    typedef struct Branch {
+    struct Branch *leftc, *rightc;
+    char *str;
+    }Branch;
 
-/* a list of LLItems */
-typedef struct {
-  LLItem *first *last *left, *right;
-  char *str;
-} LList;
+    /* BST root */
+    typedef struct {
+    Branch *root;
+    } BST;
+        
+    /* create a new list */
+    Branch* addNode(Branch *root, Branch *node);
+   
+    
+    /* free memory associated with a list */
+    void BSTFree(BST *bst);
 
-extern int heck;		/* set true for paranoid consistency checking */
-/* create a new list */
-LList *llAlloc();
+    /* insert new nodes to be inserted */
+    void BSTInsert(BST *bst, char *s);
 
-/* free memory associated with a list, discarding all items it contains */
-void llFree(LList *lp);
+    /* print B-tree list  */
+    void printBST(BST *bst);
 
-/* append a copy of str to end of list */
-void llPut(LList *lp, char *s);
 
-/* Delete all elements off of the list */
-void llMakeEmpty(LList *lp);
 
-/* print list membership.  Prints default mesage if message is NULL */
-void llPrint(LList *lp, char *msg);
 
-/* check llist consistency, always returns zero */
-int llCheck(LList *lp);
-
-#endif	/* included */
+    #endif	/* included */

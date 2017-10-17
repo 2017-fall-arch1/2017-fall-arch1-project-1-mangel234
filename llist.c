@@ -2,109 +2,75 @@
 #include <stdlib.h> 		/* for malloc */
 #include <assert.h>		/* for assert */
 #include "llist.h"		
+#include <string.h>
+/*int llDoCheck = 1;*/		/* set true for paranoid consistency checking*/
 
-int llDoCheck = 1;		/* set true for paranoid consistency checking */
+/*#define doCheck(_lp) (llDoCheck && llCheck(_lp))*/
 
-#define doCheck(_lp) (llDoCheck && llCheck(_lp))
+
+    //* Allocate memory space for the Binary class 
+BST *BSTAlloc(){
+	BST *bst =(BST *)malloc(sizeof(BST));
+	bst->root = 0;
+	return bst;
+}
+ 
+void printBST(BST *bst){
+    BSTPrint(bst->root); //Needed in order fo the recursion to work
+     
+}
+void BSTPrint(Branch *node){
+ //Prints the BST Recursively in Ascending order
+    printf("%s\n" ,node->str);
+    if(node != NULL){
+    BSTPrint(node->leftc);
+    printf("%s\n" ,node->str);
+    BSTPrint(node->rightc);
+   }
+ }
+
 
 /* create a new binary tree */
-LList *llAlloc()
+void BSTInsert(BST *bst, char *s)
 {
- LList *lp = (LList *)malloc(sizeof(LList));
- lp->left = lp->right = 0;
- // doCheck(lp);
- return lp;
-}
+	int length; 
+	char *scopy;
+	Branch *node;
+    node = (Branch *)malloc(sizeof(Branch));
+	for(length=0; s[length]; length++);
 
+	scopy = (char *)malloc(length+1);
+	for(length = 0; s[length]; length++)
+	    scopy[length] = s[length];
+
+	scopy[length] =0;
+
+	node->str = scopy;
+	node->leftc = NULL;
+	node->rightc = NULL;
+    
+	bst->root = addNode(bst->root, node);
+
+}
 /* recycle a list, discarding all items it contains */
-void llFree(LList *lp)
-{
-  doCheck(lp);
-  llMakeEmpty(lp);
-  free(lp);
+Branch* addNode(Branch *root, Branch *node){
+    
+    if(root == NULL){
+        return node;
+    }
+    int compareVal = strcmp(node->str, root->str);
+    //compare the root to the newly give item 
+    if(0 > compareVal){
+        root->leftc =addNode(root->leftc, node);
+    }
+    else{
+        root->rightc =addNode(root->rightc,node);
+    }
+    return root;
 }
 
 /* Delete all elements off of the list */
-void llMakeEmpty(LList *lp)
-{
-  LLItem *current = lp->first, *next;
-  doCheck(lp);
-  while (current) {
-    next = current->next;
-    free(current->str);
-    free(current);
-    current = next;
-  }
-  lp->first = lp->last = 0;	/* list is empty */
-  doCheck(lp);
-}
+
   
-/* append a copy of str to end of list */
-void llPut(LList *lp, char *str)
-{
-  int len;
-  char *scopy;
-  LLItem *i;
-
- // doCheck(lp);
-  /* w = freshly allocated copy of putWord */
-  for (len = 0; s[len]; len++) /* compute length */
-    ;
-  scopy = (char *)malloc(len+1);
-  for (len = 0; s[len]; len++) /* copy chars */
-    scopy[len] = s[len];
-  scopy[len] = 0;			/* terminate copy */
-
-
-  /* i = new item containing s */
-  i = (LLItem *)malloc(sizeof(LLItem));
-  i->str = scopy;
-  i->next = 0;
-
-  /* append to end of list */
- /*if (lp->last) {	*/		/* list not empty */
-  /*  lp->last->next = i;*/
-/*  } else {	*/		/* list empty */
- /*   lp->first = i;*/
- /* }*/
-
- /* if the tree is empty, retunr a new node */
-    if(*lp == NULL) return *llAlloc();
- /* otherwise, recur down the tree */
-    if(strcmp(i, lp->i) < 0)
-	   lp->left = insert(lp->left, i);
-    else if(strcmp(i,lp->i) > 0)
-		   lp->right = insert(lp(lp->right, lp);
-
-	return lp; 
-  /* new item is last on list */
-/*  lp->last = i;*/
-/*  // doCheck(lp);*/
-}
 
 /* print list membership.  Prints default mesage if message is NULL */
-void llPrint(LList *lp, char *msg)
-{
-  LLItem *ip;
-  int count = 1;
-  doCheck(lp);
-  puts(msg ? msg :" List contents:");
-  for (ip = lp->first; ip; ip = ip->next) {
-    printf("  %d: <%s>\n", count, ip->str);
-    count++;
-  }
-}
-
-/* check llist consistency */
-int llCheck(LList *lp)
-{
-  LLItem *ip;
-  ip = lp->first;
-  if (!ip) 
-    assert(lp->last == 0);
-  else {
-    for (; ip->next; ip = ip->next);
-    assert(ip == lp->last);
-  }
-  return 0;
-}

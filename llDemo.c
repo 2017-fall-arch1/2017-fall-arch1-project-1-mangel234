@@ -19,24 +19,31 @@ int gets_n(char *s, int limit)
 }
 
 int main()
+
 {
-  char buf[100];
-  LList *lp = llAlloc();	/* make empty list */
 
-/*  llPrint(lp, "List contents, prior to reading input:");*/
+    printf("Starting Arch 1 demo, hold onto your seats..");
 
- 
-  while (gets_n(buf, 100))	/* build list */
-    llPut(lp, buf);
+    char buf[100];
+    /* make empty list */
+    BST *bst = BSTAlloc();
+  
+    printf("Welcome to the Binary Search tree\n");
 
- /* llPrint(lp, "List contents, after building list:");*/
-
- /* llMakeEmpty(lp);*/
-
-  printf("After emptying the list...");
- /* llPrint(lp, 0);*/		/* default message */
-
-/*  llFree(lp);*/
+  while (gets_n(buf, 100)){	/* build list */
+    printf("Enter names or 'exit'\n");
+	
+    if(strcmp(buf,"exit") == 0){
+	 	break;
+      }
+      
+      BSTInsert(bst,buf); //Inserting new node from user
+}
+    //Work in progress
+      printBST(bst); //Print the binary tree we have created
+    
+  printf("Exiting program sad face :(...\n");
 
   return 0;
-}
+  } 
+  
