@@ -33,7 +33,8 @@ void readFile(){
     FILE *fileReader;
     char filename[15];
     char ch;
- 
+
+   
     printf("Enter the filename \n");
     scanf("%s", filename);
     //  open the file for reading 
@@ -42,12 +43,14 @@ void readFile(){
     {
         printf("Cannot open file \n");
         exit(0);
-    }
+    } 
     ch = fgetc(fileReader); //Grabs the characters and checks if all of the chars have been read
+    int i = 0;
     while (ch != EOF)
     {
-        printf ("%c", ch); 
-        ch = fgetc(fileReader);
+       
+         printf ("%c", ch); 
+         ch = fgetc(fileReader);
     }
     printf("\n");
     fclose(fileReader);

@@ -36,30 +36,40 @@ int main()
 
   while (!(strcmp(buf,"exit") == 0)){	/* build list */
     
-    printf("Enter names or 'exit'\n");
+    printf("Enter Employees names to be inseted or 'exit'\n");
     gets_n(buf, 100);
     
         if(strcmp(buf,"exit") == 0){
             break;
         }
-      
+        
+
       BSTInsert(bst,buf); //Inserting new node from user
-    }
+ }
     //Work in progress
 
       printf("\n");
-      printf("Printing Whole list..\n");
+      printf("Printing Whole Worker list..\n");
+      printf("......................................................\n");
+      printf("..............................................\n");
+      printf("....................................\n");
+      printf(".............................\n");
+      printf("..............\n");
+      printf("...\n");
       printBST(bst); //Print the binary tree we have created
       printf("\n");
       printf("\n");
-      printf("Writing Binary Tree to file..\n");
+      printf("Writing Worker Names - Binary Tree to file..\n");
       processPrint(bst); //Make a file with bst
       printf("\n");
       printf("\n");
-      readFile();
+      readFile(bst); //Insert file names to bst
+      printf("\n");
+      printf("Printing list again after adding those new workers..\n");
+      printBST(bst); //Print the binary tree we have created
       printf("\n");
       printf("Exiting program sad face :(...\n");
-
+      printf("\n");
   return 0;
 } 
   
