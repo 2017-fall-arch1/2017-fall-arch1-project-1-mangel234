@@ -11,7 +11,7 @@
     //* Allocate memory space for the Binary class 
 BST *BSTAlloc(){
 	BST *bst =(BST *)malloc(sizeof(BST));
-	bst->root = 0;
+	bst->root = NULL;
 	return bst;
 }
  
@@ -21,21 +21,63 @@ void printBST(BST *bst){
 }
 void BSTPrint(Branch *node){
  //Prints the BST Recursively in Ascending order
-    printf("%s\n" ,node->str);
+  
     if(node != NULL){
     BSTPrint(node->leftc);
     printf("%s\n" ,node->str);
     BSTPrint(node->rightc);
    }
  }
+//Read a file from same directory
+void readFile(){
+    FILE *fileReader;
+    char filename[15];
+    char ch;
+ 
+    printf("Enter the filename \n");
+    scanf("%s", filename);
+    //  open the file for reading 
+    fileReader = fopen(filename, "r");
+    if (fileReader == NULL)
+    {
+        printf("Cannot open file \n");
+        exit(0);
+    }
+    ch = fgetc(fileReader); //Grabs the characters and checks if all of the chars have been read
+    while (ch != EOF)
+    {
+        printf ("%c", ch); 
+        ch = fgetc(fileReader);
+    }
+    printf("\n");
+    fclose(fileReader);
+}
+ 
+void processPrint(BST *bst)
+{
+    FILE *fp; 
+    fp = fopen("bst.txt", "w"); //Tells u to read and write to file
+   makeFile(bst->root, fp);
+}
 
 
-/* create a new binary tree */
+void makeFile(Branch *node, FILE *fp)
+{
+        //Inorder printing
+        if( node != NULL ){
+        makeFile(node-> leftc, fp);
+        printf("%s\n", node-> str); //Print the file
+        fprintf(fp, "%s\n", node-> str); //Write to file
+        makeFile(node-> rightc, fp);
+    }
+}
+/* create a new binary tree and allocates space for a emty Btree*/
 void BSTInsert(BST *bst, char *s)
 {
 	int length; 
 	char *scopy;
 	Branch *node;
+    //allocate 
     node = (Branch *)malloc(sizeof(Branch));
 	for(length=0; s[length]; length++);
 

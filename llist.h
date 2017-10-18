@@ -15,18 +15,25 @@
         
     /* create a new list */
     Branch* addNode(Branch *root, Branch *node);
-   
     
+   /*Alocate memomry for the tree*/
+
+    BST *BSTAlloc(); 
     /* free memory associated with a list */
     void BSTFree(BST *bst);
 
     /* insert new nodes to be inserted */
     void BSTInsert(BST *bst, char *s);
 
-    /* print B-tree list  */
+    /* print B-tree list  in ascending order*/
     void printBST(BST *bst);
 
-
-
-
+    void BSTPrint(Branch *node);
+    
+    void makeFile(Branch *node, FILE *fp);
+    
+    void processPrint(BST *bst);
+    
+    void readFile();
+    
     #endif	/* included */

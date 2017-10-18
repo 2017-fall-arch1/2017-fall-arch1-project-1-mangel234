@@ -16,7 +16,7 @@ llDemo.o: llDemo.c llist.h
 	cc -c $(CFLAGS) llDemo.c
 
 clean:
-	rm -f *.o llDemo
+	rm -f *.o llDemo bst.txt
 
 demo: llDemo
 	(echo first; echo "second line"; echo "third and last") | ./llDemo
